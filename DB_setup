@@ -1,0 +1,75 @@
+--CREATE TABLE CLUBS AND INSERT THE CLUB DESCRIPTIONS
+CREATE TABLE clubs (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL,
+    description TEXT
+);
+
+INSERT INTO clubs (name, description) VALUES
+('Astronomy Club', 'Focuses on celestial objects, space, and planetary studies.'),
+('Arts Club', 'Explores painting, sculpture, origami, and creative arts.'),
+('Photography Club', 'Teaches photography skills, lighting, and exposure techniques.'),
+('Radio Hub', 'Involves radio broadcasting, RJ skills, and production.'),
+('Youth Club', 'Activities for youth development, leadership, and social events.');
+
+--CREATE TABLE QUESTIONS TO CONDUCT QUIZ
+CREATE TABLE questions (
+    id SERIAL PRIMARY KEY,
+    club_id INTEGER REFERENCES clubs(id),
+    question TEXT NOT NULL,
+    option_a TEXT NOT NULL,
+    option_b TEXT NOT NULL,
+    correct_option CHAR(1) NOT NULL
+);
+
+-- Astronomy Club Questions
+INSERT INTO questions (club_id, question, option_a, option_b, correct_option) VALUES
+(1, 'Which planet lies Between Jupiter and Uranus?', 'Saturn', 'Venus', 'a'),
+(1, 'Which is the fastest rotating planet in our solar system?', 'Saturn', 'Jupiter', 'b'),
+(1, 'How many moons does the planet Mars have?', '4', '2', 'b'),
+(1, 'Phobos and Diemos are the moons of which planet in our solar system?', 'Mars', 'Mercury', 'a'),
+(1, 'What is the fifth planet in our solar system?', 'Jupiter', 'Venus', 'a');
+
+-- Arts Club Questions
+INSERT INTO questions (club_id, question, option_a, option_b, correct_option) VALUES
+(2, 'Japanese art of paper folding is known as', 'Origami', 'Karaoke', 'a'),
+(2, 'What animal often symbolizes peace in art?', 'Deer', 'Dove', 'b'),
+(2, 'Main material in paper quilling is', 'Colour paper', 'Monochrome paper', 'a'),
+(2, 'Miniature painting was developed in which part of India?', 'Northern India', 'Eastern India', 'a'),
+(2, 'Who painted Mona Lisa?', 'Leonardo da Vinci', 'Vincent van Gogh', 'a');
+
+-- Photography Club Questions
+INSERT INTO questions (club_id, question, option_a, option_b, correct_option) VALUES
+(3, 'The amount of light or darkness on a photograph is known as the:', 'Exposure', 'Contrast', 'a'),
+(3, 'The amount of light passing through a lens is defined by the:', 'Aperture', 'Film speed', 'a'),
+(3, 'What is the unit measurement for light in photography?', 'Stops', 'Shutter speeds', 'a'),
+(3, 'What is Aperture measured in?', 'Spots', 'F Numbers', 'b'),
+(3, 'What is shutter speed measured in?', 'Seconds', 'Stops', 'a');
+
+-- Radio Hub Questions
+INSERT INTO questions (club_id, question, option_a, option_b, correct_option) VALUES
+(4, 'Radio drama is a story told through', 'Sound Alone', 'Visual effect', 'a'),
+(4, 'In 1926 National Broadcasting Company of America operated two networks, called', 'The Red and Green Networks', 'The Red and Blue Networks', 'b'),
+(4, 'Community Radio is', 'Homogenous', 'Uniform', 'a'),
+(4, 'Which among the following is not the skill to be a competent radio jockey?', 'Clarity of speech', 'Expert in financing', 'b'),
+(4, 'Vividh Bharati is also known as', 'Commercial Broadcasting Company', 'Commercial Broadcasting Service', 'b');
+
+-- Youth Club Questions
+INSERT INTO questions (club_id, question, option_a, option_b, correct_option) VALUES
+(5, 'Which animal is known as the "ship of the Desert"?', 'Camel', 'Meerkat', 'a'),
+(5, 'Baby frog is known as', 'Froglet', 'Tadpole', 'b'),
+(5, 'Which animal is known as king of the jungle?', 'Tiger', 'Lion', 'b'),
+(5, 'Which symbolizes peace?', 'White', 'Green', 'a'),
+(5, 'Name the house made up of ice?', 'Igloo', 'Tanglo', 'a');
+
+--AFTER VALIDATING THE QUIZ RESULTS, GET THE STUDENT DETAILS AND INSERT IT TO THE STUDENTS TABLE
+CREATE TABLE students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    rno TEXT,
+    course TEXT,
+    email TEXT,
+    batch TEXT,
+    year INTEGER,
+    club_id INTEGER
+);
